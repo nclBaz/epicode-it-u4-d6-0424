@@ -1,9 +1,13 @@
 import entities.User;
 import exceptions.StringNotValidException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
 public class Main {
+	private static Logger logger = LoggerFactory.getLogger(Main.class);
+
 	public static void main(String[] args) {
 		// --------------------------------------- ERRORS -----------------------------------------------
 		// Gli errori, come lo StackOverflowError sono dei problemi irrecuperabili a livello di gestione errori.
@@ -41,14 +45,14 @@ public class Main {
 		// posso scrivere dei controlli per prevenire l'eccezione, quindi questa potrebbe capitare comunque e di conseguenza
 		// farci esplodere l'applicazione
 
-		try {
+/*		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// throw new RuntimeException(e);
 			System.out.println("C'è stato un problema");
 		}
 
-		System.out.println("CIAO");
+		System.out.println("CIAO");*/
 
 
 		// --------------------------------------- ECCEZIONI CUSTOM -----------------------------------------------
@@ -89,6 +93,9 @@ public class Main {
 			scanner.close(); // Non importa se ci sono state eccezioni oppure no, lo scanner andrebbe comunque chiuso
 
 		}
+
+		logger.info("Ciao da Logback");
+		logger.error("Ciao sono un errore brutto brutto");
 
 
 	}
