@@ -1,3 +1,8 @@
+import entities.User;
+import exceptions.StringNotValidException;
+
+import java.util.Scanner;
+
 public class Main {
 	public static void main(String[] args) {
 		// --------------------------------------- ERRORS -----------------------------------------------
@@ -44,6 +49,47 @@ public class Main {
 		}
 
 		System.out.println("CIAO");
+
+
+		// --------------------------------------- ECCEZIONI CUSTOM -----------------------------------------------
+		// throw new NumberLessThanZeroException(-20);
+
+		User aldo = new User("Aldo", "Baglio");
+		try {
+			aldo.setName("A");
+		} catch (StringNotValidException e) {
+			System.out.println(e.getMessage());
+		}
+
+		System.out.println(aldo);
+
+
+		// --------------------------------------- TRY-CATCH -----------------------------------------------
+		User giova = new User("Giovanni", "Storti");
+		try {
+			giova.setName("G");
+		} catch (StringNotValidException | ArithmeticException e) {
+			// catch multi-eccezione. Serve per gestire due o più tipi di eccezione alla stessa maniera
+			System.out.println(e.getMessage());
+		} catch (NullPointerException e) {
+			System.out.println("Null pointer exception");
+		} catch (Exception e) {
+			System.out.println("C'è stato un errore generico");
+		}        // Fare più catch mi serve per gestire errori di tipologie diverse in maniere diverse
+
+		Scanner scanner = new Scanner(System.in);
+		int[] numbers2 = {0, 1, 2, 3, 4};
+		System.out.println("Inserisci un numero da 1 a 4");
+		int i = scanner.nextInt();
+		try {
+			System.out.println(5 / numbers2[i]);
+		} catch (Exception e) { // Catch polimorfico, ovvero mi consente di catchare tutti i tipi di eccezione e gestirli alla stessa maniera
+			System.out.println("Ti avevo detto di inserire un numero da 1 a 4. Il numero che hai inserito è: " + i);
+		} finally { // Il blocco finally serve per eseguire determinato codice sia se siamo finiti nei catch sia se è andato tutto liscio
+			scanner.close(); // Non importa se ci sono state eccezioni oppure no, lo scanner andrebbe comunque chiuso
+
+		}
+
 
 	}
 
